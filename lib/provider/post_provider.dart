@@ -21,4 +21,12 @@ class PostProvider with ChangeNotifier {
 
     notifyListeners();
   }
+
+  initData() async {
+    var postDB = PostDB(databaseName: 'app.db');
+    var postsFromDB = await postDB.loadAllPosts();
+
+    _posts = [...postsFromDB];
+    notifyListeners();
+  }
 }
