@@ -8,7 +8,7 @@ import 'package:sembast/sembast_io.dart';
 class PostDB {
   String databaseName;
 
-  PostDB({this.databaseName});
+  PostDB(this.databaseName);
 
   Future<Database> openDatabase() async {
     Directory appDocumentDirectory = await getApplicationDocumentsDirectory();
@@ -35,7 +35,14 @@ class PostDB {
     var database = await this.openDatabase();
     var postStore = intMapStoreFactory.store('posts');
 
-    var snapshots = await postStore.find(database);
+    var snapshots = await postStore.find(
+      database,
+      finder: Finder(
+        sortOrders: [
+          SortOrder(Field.key, false),
+        ],
+      ),
+    );
     var postsList = List<Post>();
 
     for (var record in snapshots) {
@@ -44,5 +51,11 @@ class PostDB {
     }
 
     return postsList;
+  }
+
+  Future<void> clearPostData() async {
+    var database = await this.openDatabase();
+    var postStore = intMapStoreFactory.store('posts');
+    await postStore.drop(database);
   }
 }
