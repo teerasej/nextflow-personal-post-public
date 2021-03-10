@@ -8,12 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Nextflow Personal Post',
+      title: 'suriya Post22',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Personal Post'),
+      home: MyHomePage(title: 'Suriya Post223'),
     );
   }
 }
